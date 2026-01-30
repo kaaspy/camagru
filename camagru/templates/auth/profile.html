@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block header %}
+    <h1>{% block title %}Profile{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        <label for="username">Username</label>
+        <input name="username" id="username" value="{{ username }}" required>
+
+        <label for="email">Email</label>
+        <input name="email" id="email" value="{{ email }}" required>
+
+        <label for="is_notified">Notifications</label>
+        <input type="checkbox" name="is_notified" id="is_notified" {% if is_notified %}checked{% endif %}>
+
+        <a href="{{ base_url }}/auth/password_reset" class="button" target="_self">Change my password</a>
+
+        <input type="submit" value="Save my profile">
+    </form>
+{% endblock %}

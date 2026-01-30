@@ -1,0 +1,31 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - PYTHON_VERSION=3.11
+    container_name: camagru
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app:/app
+      - ./logs:/app/logs
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+      # Add db url
+    env_file:
+      - .env
+    restart: unless-stopped
+
+    develop:
+      watch:
+        - action: rebuild
+          path: ./requirements.txt
+        - action: sync
+          path: ./app
+          target: /app
+        - action: sync
+          path: ./app/templates
+          target: /app/templates

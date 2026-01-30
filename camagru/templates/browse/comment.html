@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block header %}
+    <h1>{% block title %}Comment{% endblock %}</h1>
+    <style>
+    .images-container {
+        display: flex;
+        flex-direction: column;
+    }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="post-container">
+    <img id="post_{{ post.id }}" src="{{ post.path }}" style="max-width: 300px">
+</div>
+<div class="comments-container">
+    <h3>Comment list</h3>
+    {% for comment in comments %}
+    <div class="comment-{{comment.id}}-container">
+        <p>{{ comment.user }} at {{ comment.created_at }} :</p>
+        <p>{{ comment.content }}</p>
+    </div>
+    {% endfor %}
+</div>
+<div class="input-containter">
+    <form method="post">
+        <label for="comment">Comment</label>
+        <input name="comment" id="comment" required>
+        <input type="submit" value="Send comment">
+    </form>
+</div>
+{% endblock %}

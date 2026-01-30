@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Welcome to Camagru</h1>
+            </div>
+            <div class="content">
+                <h3>Hello {{ username }},</h3>
+                <p>Thank you for registering. Please verify your email address by clicking the link below :</p>
+                <a href="{{ url }}" class="button">Verify my email</a>
+            </div>
+            <div class="footer">
+                <p>&copy; 2026 Camagru. Soon on github.</p>
+            </div>
+        </div>
+    </body>
+</html>

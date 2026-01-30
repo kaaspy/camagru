@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block header %}
+    <h1>{% block title %}Posts{% endblock %}</h1>
+    <style>
+    .images-container {
+        display: flex;
+        flex-direction: column;
+    }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="images-container">
+    {% for post in show_posts(page) %}
+    <div class="post-{{ post.id }}-container">
+        <img id="post_{{ post.id }}" src="{{ post.path }}" style="max-width: 300px">
+        <small>Posted by {{ post.user }} at {{ post.created_at }}</small>
+        {% if g.user %}
+            {% if post.is_liked %}
+                Liked <a href="{{ url_for('browse.unlike', post_unliked=post.id)}}">Unlike</a>
+            {% else %}
+                <a href="{{ url_for('browse.like', post_liked=post.id)}}">Like this post</a>
+            {% endif %}
+        {% endif %}
+        <small>{{ post.like_count }} &lt;3 </small>
+        {% if g.user %}
+            <a href="{{ url_for('browse.comment', post_commented=post.id)}}">Comment this post</a>
+        {% endif %}
+        <small>{{ post.comment_count }} comments</small>
+    </div>
+    {% endfor %}
+    <div class="pagination-container">
+        <p>
+            {% if page > 1 %}
+                <a href="{{ url_for('browse.browse', page=page-1)}}">Previous</a>
+            {% endif %}
+            Page {{ page }}/{{ page_number }}
+            {% if page < page_number %}
+            <a href="{{ url_for('browse.browse', page=page+1)}}">Next</a>
+            {% endif %}
+        </p>
+    </div>
+</div>
+{% endblock %}
