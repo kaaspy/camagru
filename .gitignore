@@ -1,0 +1,38 @@
+#Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+venv/
+env/
+.venv/
+ENV/
+
+# Environment variables
+.env
+.flaskenv
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE
+.vscode/
+*~
+
+# Flask specific
+instance/
+
+# Docker
+.dockerignore
+Dockerfile
+docker-compose*.yml
+
+# Logs
+*.log
