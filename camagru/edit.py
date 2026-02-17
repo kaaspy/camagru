@@ -1,9 +1,10 @@
+import os, uuid
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for,
     current_app
 )
+from PIL import Image
 from camagru.db import get_db
-from camagru.file import save_image
 
 bp = Blueprint("edit", __name__, url_prefix="/edit")
 
@@ -27,16 +28,46 @@ def edit():
         flash("You must validate your email to use the editor")
         return redirect(url_for("auth.login"))
 
+    stickers = []
+    if os.path.exists(os.path.join(current_app.root_path, "static", "stickers")):
+        stickers = [{ "name": f,
+                      "path": os.path.join("/static/stickers", f)}
+                      for f in os.listdir(os.path.join(current_app.root_path, "static", "stickers"))]
+
+    posts = []
+    if (os.path.exists(os.path.join(current_app.root_path, "static", "posts"))):
+        db = get_db()
+        cursor = db.execute(
+            """
+            SELECT * FROM POST
+            WHERE user_id = ?
+            ORDER BY created_at DESC
+            """,
+            (g.user["id"],))
+        posts_db = cursor.fetchall()
+        for post in posts_db:
+            posts.append({
+                "id": post["id"],
+                "path": os.path.join("/static", "posts", post["image_name"]),
+                "created_at": post["created_at"].strftime("%Y-%m-%d %H:%M"),
+            })
+
     if request.method == "POST":
-        if "uploaded_image" not in request.files:
+        if "image_data" not in request.files:
             flash("No file selected")
             return redirect(url_for("edit.edit"))
-
-        file = request.files["uploaded_image"]
-        (is_saved, name) = save_image(file)
-        if not is_saved:
-            flash(name)
+        if "sticker_name" not in request.form:
+            flash("No sticker selected")
             return redirect(url_for("edit.edit"))
+
+        capture = Image.open(request.files["image_data"])
+        sticker = Image.open(os.path.join("camagru/static/stickers", request.form["sticker_name"]))
+        final = Image.new("RGBA", (640, 480))
+        final.paste(sticker, (0, 0))
+        final.paste(capture, (0, 0))
+
+        name = f"{uuid.uuid4().hex[:16]}.png"
+        final.save(os.path.join(current_app.root_path, "static", "posts", name))
 
         user = g.user
         db = get_db()
@@ -44,7 +75,23 @@ def edit():
             "INSERT INTO POST (user_id, image_name) VALUES (?, ?)",
             (user["id"], name))
         db.commit()
-        
         flash("File saved")
+        return redirect(url_for("edit.edit"))
 
-    return render_template("edit/edit.html")
+    return render_template("edit/edit.html", stickers=stickers, posts=posts)
+
+@bp.route("/delete/<int:post_deleted>")
+def delete(post_deleted=None):
+    db = get_db()
+    post_db = db.execute("SELECT * FROM POST WHERE id = ?", (post_deleted,)).fetchone()
+    if not post_db:
+        flash("This post does not exist")
+        return redirect(url_for("edit.edit"))
+    if not post_db["user_id"] == g.user["id"]:
+        flash("You must be the owner of this post to delete it")
+        return redirect(url_for("edit.edit"))
+    db.execute("DELETE FROM COMMENT WHERE post_id = ?", (post_deleted,))
+    db.execute("DELETE FROM HEART WHERE post_id = ?", (post_deleted,))
+    db.execute("DELETE FROM POST WHERE id = ?", (post_deleted,))
+    db.commit()
+    return redirect(url_for("edit.edit"))

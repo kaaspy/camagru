@@ -44,6 +44,22 @@ def register():
             error = "Email is required"
         if not password:
             error = "Password is required"
+        
+        strength = 0
+        special_chars = "!@#$%^&*(),.?\":{}|<>"
+        if len(password) >= 8:
+            strength += 1
+        if any(c.isupper() for c in password):
+            strength += 1
+        if any(c.islower() for c in password):
+            strength += 1
+        if any(c.isdigit() for c in password):
+            strength += 1
+        if any(c in special_chars for c in password):
+            strength += 1
+        
+        if strength < 3:
+            error = "Your password is too weak"
 
         if error is None:
             token = secrets.token_urlsafe(16)
@@ -127,7 +143,7 @@ def profile():
             )
             db.commit()
             
-            flash(f"Your changes have been saved")
+            flash(f"Your profile have been saved")
             return redirect(url_for("auth.profile"))
 
         if error:

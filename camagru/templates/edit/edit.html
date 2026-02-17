@@ -4,34 +4,165 @@
 {% endblock %}
 
 {% block content %}
-<div class="upload-container">
-    <h2>Upload a new post</h2>
-    <form method="post" enctype="multipart/form-data">
-        <div>
-            <label for="uploaded_image">Select an image</label>
-            <input type="file" name="uploaded_image" id="uploaded_image" accept="iamge/*">
-            <small>Accepts .png and .jpg up to 5MB</small>
-            <input type="submit" value="Upload">
+<div class="full-editor-container">
+    <div class="basic-editor-container">
+        <div class="file-container">
+            <form method="post" enctype="multipart/form-data">
+                <div>
+                    <label for="uploaded_image">Upload an image</label>
+                    <input type="file" name="uploaded_image" id="uploaded_image" accept="image/*">
+                </div>
+            </form>
         </div>
-    </form>
-</div>
-<div class="preview">
-    <h2>Preview</h2>
-    <img id="preview-image" src="#" style="max-width: 300px">
-</div>
-<script>
-    document.getElementById("uploaded_image").addEventListener("change", function(ev) {
-        const file = ev.target.files[0];
-        const preview = document.getElementById("preview-image");
 
+        <div class="canvas-container">
+            <video id="webcam" width="640" height="480" style="display: none;"></video>
+            <canvas id="canvas" width="640" height="480"></canvas>
+            <button id="restart_webcam" style="display: none;">Restart webcam</button>
+            <button id="capture_webcam" style="display: flex;">Capture webcam</button>
+        </div>
+
+        <div class="upload-container">
+            <form id="upload_canvas" method="post" enctype="multipart/form-data">
+                <input id="image_data" name="image_data" type="file" style="display: none;">
+                <input id="sticker_name" name="sticker_name" type="text" style="display: none;">
+                <input id="submit_button" type="submit" value="Upload" disabled>
+            </form>
+        </div>
+
+        <div class="stickers-container">
+            <h3>Stickers</h3>
+            {% for sticker in stickers %}
+                <img id="{{ sticker.name }}" src="{{ sticker.path }}" class="sticker" style="max-width: 100px">
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="sidebar-post-container">
+        <h3>Posts</h3>
+        <div class="sidebar-grid-container">
+            {% for post in posts %}
+            <div class="sidebar-post-container-{{ post.id }}">
+                <img id="post_{{ post.id }}" src="{{ post.path }}" style="max-width: 100px">
+                <a href="{{ url_for('edit.delete', post_deleted=post.id)}}" title="Delete this post">
+                    <img src="/static/icons/delete.svg" class="delete-icon" alt="Delete this post">
+                </a>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    const webcam = document.getElementById("webcam");
+    const canvas = document.getElementById("canvas");
+    const uploadedImage = document.getElementById("uploaded_image");
+    const restartButton = document.getElementById("restart_webcam");
+    const captureButton = document.getElementById("capture_webcam");
+    const uploadCanvas = document.getElementById("upload_canvas");
+    const imageData = document.getElementById("image_data");
+    const stickerName = document.getElementById("sticker_name");
+    const submitButton = document.getElementById("submit_button");
+    let isCanvasLocked = false;
+    let sticker = null;
+
+    //Preview uploaded file on canvas
+    uploadedImage.addEventListener("change", function(e) {
+        const file = e.target.files[0];
         if (file) {
             const fr = new FileReader();
-            fr.onload = function(ev) {
-                preview.src = ev.target.result;
+            fr.onload = function(e) {
+                isCanvasLocked = true;
+                const img = new Image();
+                const context = canvas.getContext("2d");
+                img.src = e.target.result;
+                //Double frame to ensure webcamToCanvas is disabled
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {context.drawImage(img, 0, 0, 640, 480);})
+                })
             }
-            fr.readAsDataURL(file)
+            fr.readAsDataURL(file);
+            captureButton.style.display = "none";
+            restartButton.style.display = "flex";
         }
-
     });
+
+    //Webcam
+    //https://developer.mozilla.org/en-US/docs/Web/API/Media_Capture_and_Streams_API/Taking_still_photos
+
+    //Init
+    function startWebcam() {
+        try {
+            navigator.mediaDevices
+                .getUserMedia({ video: true, audio: false})
+                .then((stream) => {
+                    webcam.srcObject = stream;
+                    webcam.onloadedmetadata = () => {
+                        webcam.play();
+                        webcamToCanvas();
+                    };
+                });
+        } catch (e) {
+            alert("No webcam access. Grant permissions to use the feature");
+        }
+    }
+    startWebcam();
+
+    //Draw webcam to canvas
+    function webcamToCanvas() {
+        const context = canvas.getContext("2d");
+        if (!isCanvasLocked) {
+            context.drawImage(webcam, 0, 0, 640, 480);
+        }
+        if (sticker) {
+            const img = new Image();
+            img.src = sticker["src"];
+            context.drawImage(img, 0, 0);
+        }
+        requestAnimationFrame(webcamToCanvas);
+    }
+
+    //Lock canvas
+    captureButton.addEventListener("click", (e) => {
+        isCanvasLocked = true;
+        captureButton.style.display = "none";
+        restartButton.style.display = "flex";
+    });
+
+    //Unlock canvas
+    restartButton.addEventListener("click", (e) => {
+        isCanvasLocked = false;
+        captureButton.style.display = "flex";
+        restartButton.style.display = "none";
+    });
+
+    //Upload canvas
+    uploadCanvas.addEventListener("submit", (e) => {
+        e.preventDefault();
+        canvas.toBlob((b) => {
+            const file = new File([b], "canvas.jpeg", {
+                type: "image/jpeg",
+                lastModified: Date.now(),
+            });
+            const dt = new DataTransfer();
+            dt.items.add(file);
+            imageData.files = dt.files;
+            stickerName.value = sticker["name"];
+            uploadCanvas.submit();
+        }, "image/jpeg");
+    });
+
+    //Sticker selection
+    const stickers = document.querySelectorAll(".sticker");
+    stickers.forEach(s => {
+        s.addEventListener("click", (e) => {
+            sticker = {
+                "src": e.srcElement.src,
+                "name": e.srcElement.id,
+            }
+            submitButton.disabled = false;
+        });
+    });
+
 </script>
 {% endblock %}

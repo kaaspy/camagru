@@ -54,7 +54,7 @@ def processor():
                 posts.append({
                     "id": post["id"],
                     "path": os.path.join("/static", "posts", post["image_name"]),
-                    "user": "you" if post_creator["id"] == post["user_id"]  else post_creator["username"],
+                    "user": "you" if g.user and post_creator["id"] == g.user["id"] else post_creator["username"],
                     "created_at": post["created_at"].strftime("%Y-%m-%d %H:%M"),
                     "like_count": like_count,
                     "comment_count": comment_count,
