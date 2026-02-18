@@ -10,19 +10,19 @@
 {% endblock %}
 
 {% block content %}
-<div class="post-container">
-    <img id="post_{{ post.id }}" src="{{ post.path }}" style="max-width: 300px">
+<div class="comment-post-container">
+    <img id="post_{{ post.id }}" src="{{ post.path }}">
 </div>
 <div class="comments-container">
     <h3>Comment list</h3>
     {% for comment in comments %}
-    <div class="comment-{{comment.id}}-container">
-        <p>{{ comment.user }} at {{ comment.created_at }} :</p>
+    <div class="comment-container-{{comment.id}}">
+        <small>{{ comment.user }} at {{ comment.created_at }} :</small>
         <p>{{ comment.content }}</p>
     </div>
     {% endfor %}
 </div>
-<div class="input-containter">
+<div class="comment-input-container">
     <form method="post">
         <label for="comment">Comment</label>
         <input name="comment" id="comment" required>

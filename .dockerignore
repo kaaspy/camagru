@@ -15,6 +15,5 @@ venv/
 *.db
 logs/
 *.log
-.env
 docker-compose.yml
 Dockerfile

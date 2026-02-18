@@ -22,3 +22,6 @@ instance/
 
 # Data
 camagru/static/posts/
+
+# Misc
+mailpit.sh

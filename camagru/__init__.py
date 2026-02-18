@@ -1,5 +1,5 @@
 import os
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, flash
 
 def create_app(config=None):
     app = Flask(__name__)
@@ -15,6 +15,10 @@ def create_app(config=None):
     @app.route("/")
     @app.route("/index")
     def index():
+        return redirect(url_for("browse.browse"))
+
+    @app.errorhandler(Exception)
+    def not_found(err):
         return redirect(url_for("browse.browse"))
     
     from . import db

@@ -127,6 +127,26 @@ nav ul  {
   flex-direction: column;
 }
 
+/* Comments */
+.comment-post-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.comment-post-container img {
+  max-width: 100%;
+}
+
+[class^="comment-container-"] {
+  border: 2px solid #377ba8;
+  margin: 0.5rem;
+}
+
+.comment-input-container form input{
+  min-width: 60%;
+}
+
 /* Sidebar */
 .full-editor-container {
   display: flex;
@@ -167,6 +187,7 @@ nav ul  {
 
 
 }
+
 [class^="sidebar-post-container-"] {
   position: relative;
 }

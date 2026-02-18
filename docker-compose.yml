@@ -1,31 +1,38 @@
 services:
   web:
+    container_name: camagru
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        - PYTHON_VERSION=3.11
-    container_name: camagru
+        - PYTHON_VERSION=3.13
     ports:
       - "5000:5000"
     volumes:
-      - ./app:/app
-      - ./logs:/app/logs
-    environment:
-      - FLASK_APP=app.py
-      - FLASK_ENV=development
-      # Add db url
+      - ./camagru:/camagru
     env_file:
       - .env
     restart: unless-stopped
+    networks:
+      - net
+    depends_on:
+      mail:
+        condition: service_started
 
-    develop:
-      watch:
-        - action: rebuild
-          path: ./requirements.txt
-        - action: sync
-          path: ./app
-          target: /app
-        - action: sync
-          path: ./app/templates
-          target: /app/templates
+  mail:
+  # Mailpit service to not have to pay for mailing
+    image: axllent/mailpit
+    container_name: mailpit
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    environment:
+      MP_SMTP_AUTH: camagru:password123
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+    networks:
+      - net
+
+networks:
+  net:
+    driver: bridge

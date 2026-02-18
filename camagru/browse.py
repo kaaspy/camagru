@@ -130,6 +130,7 @@ def comment(post_commented=None):
             users.append(user)
 
         comments.append({
+            "id": comment["id"],
             "user": next(u["username"] for u in users if u["id"] == comment["user_id"]),
             "content": comment["content"],
             "created_at": comment["created_at"].strftime("%Y-%m-%d %H:%M"),
