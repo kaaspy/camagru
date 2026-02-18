@@ -65,10 +65,34 @@
     const submitButton = document.getElementById("submit_button");
     let isCanvasLocked = false;
     let sticker = null;
+    let captureMode = true;
+    let capturedImage = null;
+
+
+    //Capture mode handler
+    function setCapture(state) {
+        if (state == "disabled") {
+            captureMode = false;
+            captureButton.style.display = "none";
+            restartButton.style.display = "none";
+        }
+        if (captureMode && state == "on") {
+            captureMode = true;
+            captureButton.style.display = "flex";
+            restartButton.style.display = "none";
+        }
+        if (captureMode && state == "off") {
+            captureMode = true;
+            captureButton.style.display = "none";
+            restartButton.style.display = "flex";
+        }
+    }
 
     //Preview uploaded file on canvas
-    uploadedImage.addEventListener("change", function(e) {
-        const file = e.target.files[0];
+    uploadedImage.addEventListener("change", drawFromFile);
+
+    function drawFromFile() {
+        const file = uploadedImage.files[0];
         if (file) {
             const fr = new FileReader();
             fr.onload = function(e) {
@@ -76,35 +100,34 @@
                 const img = new Image();
                 const context = canvas.getContext("2d");
                 img.src = e.target.result;
+                capturedImage = img;
                 //Double frame to ensure webcamToCanvas is disabled
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {context.drawImage(img, 0, 0, 640, 480);})
                 })
             }
             fr.readAsDataURL(file);
-            captureButton.style.display = "none";
-            restartButton.style.display = "flex";
+            setCapture("off");
         }
-    });
+    }
 
     //Webcam
     //https://developer.mozilla.org/en-US/docs/Web/API/Media_Capture_and_Streams_API/Taking_still_photos
 
     //Init
     function startWebcam() {
-        try {
-            navigator.mediaDevices
-                .getUserMedia({ video: true, audio: false})
-                .then((stream) => {
-                    webcam.srcObject = stream;
-                    webcam.onloadedmetadata = () => {
-                        webcam.play();
-                        webcamToCanvas();
-                    };
-                });
-        } catch (e) {
-            alert("No webcam access. Grant permissions to use the feature");
-        }
+        navigator.mediaDevices
+            .getUserMedia({ video: true, audio: false})
+            .then((stream) => {
+                webcam.srcObject = stream;
+                webcam.onloadedmetadata = () => {
+                    webcam.play();
+                };
+            })
+            .catch(() => {
+                setCapture("disabled");
+            });
+        webcamToCanvas();
     }
     startWebcam();
 
@@ -113,6 +136,10 @@
         const context = canvas.getContext("2d");
         if (!isCanvasLocked) {
             context.drawImage(webcam, 0, 0, 640, 480);
+
+            const img = new Image();
+            img.src = canvas.toDataURL("image/jpeg");
+            capturedImage = img;
         }
         if (sticker) {
             const img = new Image();
@@ -125,15 +152,13 @@
     //Lock canvas
     captureButton.addEventListener("click", (e) => {
         isCanvasLocked = true;
-        captureButton.style.display = "none";
-        restartButton.style.display = "flex";
+        setCapture("off");
     });
 
     //Unlock canvas
     restartButton.addEventListener("click", (e) => {
         isCanvasLocked = false;
-        captureButton.style.display = "flex";
-        restartButton.style.display = "none";
+        setCapture("on");
     });
 
     //Upload canvas
@@ -161,6 +186,12 @@
                 "name": e.srcElement.id,
             }
             submitButton.disabled = false;
+
+            //Refresh image 
+            const context = canvas.getContext("2d");
+            if (capturedImage) {
+                context.drawImage(capturedImage, 0, 0, 640, 480);
+            }
         });
     });
 

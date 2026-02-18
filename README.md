@@ -31,6 +31,7 @@ docker-compose up --build
 
 ## Misc
 
+You will need to provide your own env file
 There is a SQL injection sample file
 
 ## PHP standard library equivalents
