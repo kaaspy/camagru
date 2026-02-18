@@ -33,7 +33,7 @@ docker-compose up --build
 
 There is a SQL injection sample file
 
-## PHP standard library correspondances
+## PHP standard library equivalents
 
 ### Core
 

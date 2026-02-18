@@ -11,7 +11,8 @@ services:
     volumes:
       - ./camagru:/camagru
     env_file:
-      - .env
+      - path: .env
+        required: false
     restart: unless-stopped
     networks:
       - net
