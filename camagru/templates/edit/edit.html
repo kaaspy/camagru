@@ -75,6 +75,7 @@
             captureMode = false;
             captureButton.style.display = "none";
             restartButton.style.display = "none";
+            isCanvasLocked = true;
         }
         if (captureMode && state == "on") {
             captureMode = true;
@@ -101,7 +102,7 @@
                 const context = canvas.getContext("2d");
                 img.src = e.target.result;
                 capturedImage = img;
-                //Double frame to ensure webcamToCanvas is disabled
+                //Double frame to ensure refreshCanvas is disabled
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {context.drawImage(img, 0, 0, 640, 480);})
                 })
@@ -127,16 +128,15 @@
             .catch(() => {
                 setCapture("disabled");
             });
-        webcamToCanvas();
+        refreshCanvas();
     }
     startWebcam();
 
     //Draw webcam to canvas
-    function webcamToCanvas() {
+    function refreshCanvas() {
         const context = canvas.getContext("2d");
         if (!isCanvasLocked) {
             context.drawImage(webcam, 0, 0, 640, 480);
-
             const img = new Image();
             img.src = canvas.toDataURL("image/jpeg");
             capturedImage = img;
@@ -146,7 +146,7 @@
             img.src = sticker["src"];
             context.drawImage(img, 0, 0);
         }
-        requestAnimationFrame(webcamToCanvas);
+        requestAnimationFrame(refreshCanvas);
     }
 
     //Lock canvas
@@ -189,9 +189,7 @@
 
             //Refresh image 
             const context = canvas.getContext("2d");
-            if (capturedImage) {
-                context.drawImage(capturedImage, 0, 0, 640, 480);
-            }
+            context.drawImage(capturedImage, 0, 0, 640, 480);
         });
     });
 
